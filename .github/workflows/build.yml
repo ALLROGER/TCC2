@@ -18,12 +18,6 @@ jobs:
           distribution: 'oracle'
           java-version: '17'
 
-      - name: Configurar Flutter SDK Estavel
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.24.3'
-          channel: 'stable'
-
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -34,19 +28,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Inicializar Pastas do Flutter App
-        run: |
-          flet build apk --yes || true
-
-      - name: Aplicar Vacina de Dependencias (JNI Overrides)
-        run: |
-          if [ -d "build/apk" ]; then
-            cp pubspec_overrides.yaml build/apk/ 2>/dev/null || true
-            cd build/apk
-            flutter pub get
-          fi
-
-      - name: Compilar o Aplicativo Final Destravado
+      - name: Compilar o Aplicativo (APK Nativo)
         run: |
           flet build apk --yes --include assets
 
