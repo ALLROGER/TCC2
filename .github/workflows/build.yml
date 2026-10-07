@@ -35,7 +35,7 @@ jobs:
 
       - name: Compilar o Aplicativo Sem Erros (APK)
         run: |
-          flet build apk assets
+          flet build apk main.py --assets assets
 
       - name: Disponibilizar arquivo APK para Download
         uses: actions/upload-artifact@v4
