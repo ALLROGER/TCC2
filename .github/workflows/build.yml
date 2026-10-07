@@ -34,13 +34,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Limpar residuos de builds anteriores
-        run: |
-          flet clean
-
       - name: Compilar o Aplicativo (APK)
         run: |
-          flet build apk --yes
+          flet build apk --yes --include assets
 
       - name: Disponibilizar arquivo APK para Download
         uses: actions/upload-artifact@v4
