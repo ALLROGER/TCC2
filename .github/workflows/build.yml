@@ -28,9 +28,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Compilar o Aplicativo Ignorando Trava de Metadados (APK)
+      - name: Compilar o Aplicativo Destravado (APK)
         run: |
-          flet build apk --yes --android-property android.experimental.checkJetifier=false
+          export FLUTTER_BUILD_ARGS="--android-skip-build-dependency-validation"
+          flet build apk --yes --include assets
 
       - name: Disponibilizar arquivo APK para Download
         uses: actions/upload-artifact@v4
