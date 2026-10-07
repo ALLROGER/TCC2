@@ -17,18 +17,16 @@ jobs:
         with:
           distribution: 'oracle'
           java-version: '17'
-
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet e pacotes numericos
+      - name: Instalar Flet Estavel Antigo e Numpy
         run: |
           python -m pip install --upgrade pip
-          pip install flet numpy
-
-      - name: Compilar o Aplicativo (APK Nativo)
+          pip install flet==0.23.2 numpy
+      - name: Compilar o Aplicativo Sem Erros de JNI (APK)
         run: |
           flet build apk --yes --include assets
 
