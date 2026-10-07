@@ -28,26 +28,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Compilar o Aplicativo Ignorando Trava de Metadados (APK)
+      - name: Compilar o Aplicativo Nativo (Flet Build)
         run: |
-          flet build apk --yes --flutter-build-args="--pub --build-property=android.experimental.checkJetifier=false" || true
+          flet build apk --no-config-check --no-android-licenses-check
 
-      - name: Forçar Desativação do Bloqueio de AAR no Gradle
-        run: |
-          if [ -d "build/apk/android/app" ]; then
-            echo "android.bundle.enableUncompressedNativeLibs=false" >> build/apk/android/gradle.properties
-          fi
-
-      - name: Compilar Versão Final Direto pelo Flutter
-        run: |
-          if [ -d "build/apk/android" ]; then
-            cd build/apk/android
-            ./gradlew assembleRelease -Pandroid.experimental.checkJetifier=false -x checkReleaseAarMetadata
-          fi
-
-      - name: Disponibilizar arquivo APK para Download (Busca Dinâmica)
+      - name: Disponibilizar arquivo APK para Download
         uses: actions/upload-artifact@v4
         with:
           name: Termodinamica_Movel_APK
-          path: |
-            **/*.apk
+          path: build/apk/
