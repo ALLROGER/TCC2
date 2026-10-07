@@ -34,16 +34,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Pré-inicializar ambiente móvel do Flet
-        run: |
-          flet build apk --yes || true
-
-      - name: Forçar Resolução de Conflitos de Pacotes (JNI Fix)
-        run: |
-          cd build/apk
-          flutter pub upgrade --major-versions jni jni_flutter
-
-      - name: Compilar o Aplicativo Final Destravado
+      - name: Compilar o Aplicativo (APK)
         run: |
           flet build apk --yes --include assets
 
