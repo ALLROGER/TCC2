@@ -34,7 +34,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Compilar o Aplicativo (APK)
+      - name: Inicializar Pastas do Flutter App
+        run: |
+          flet build apk --yes || true
+
+      - name: Aplicar Vacina de Dependencias (JNI Overrides)
+        run: |
+          if [ -d "build/apk" ]; then
+            cp pubspec_overrides.yaml build/apk/ 2>/dev/null || true
+            cd build/apk
+            flutter pub get
+          fi
+
+      - name: Compilar o Aplicativo Final Destravado
         run: |
           flet build apk --yes --include assets
 
