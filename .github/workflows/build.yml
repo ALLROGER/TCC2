@@ -28,9 +28,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Compilar o Aplicativo Destravado (APK)
+      - name: Compilar o Aplicativo (APK)
         run: |
-          export FLUTTER_BUILD_ARGS="--android-skip-build-dependency-validation"
           flet build apk --yes --include assets
 
       - name: Disponibilizar arquivo APK para Download
