@@ -45,8 +45,9 @@ jobs:
             ./gradlew assembleRelease -Pandroid.experimental.checkJetifier=false -x checkReleaseAarMetadata
           fi
 
-      - name: Disponibilizar arquivo APK para Download
+      - name: Disponibilizar arquivo APK para Download (Busca Dinâmica)
         uses: actions/upload-artifact@v4
         with:
           name: Termodinamica_Movel_APK
-          path: build/apk/android/app/build/outputs/apk/release/
+          path: |
+            **/*.apk
