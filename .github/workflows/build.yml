@@ -9,35 +9,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Baixar código do repositório
+      - name: Baixar codigo do repositorio
         uses: actions/checkout@v4
 
-      - name: Configurar Java JDK
+      - name: Configurar Java JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: 'oracle'
           java-version: '17'
 
-      - name: Configurar Flutter SDK
+      - name: Configurar Flutter SDK Estavel
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
+          flutter-version: '3.24.3'
+          channel: 'stable'
 
-      - name: Configurar Python
+      - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet e Dependências Numéricas
+      - name: Instalar Flet e pacotes numericos
         run: |
+          python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Compilar o Aplicativo Móvel (APK)
+      - name: Compilar o Aplicativo (APK)
         run: |
-          flet build apk --product "Termodinamica_Movel" --build-version "1.0.0"
+          flet build apk
 
       - name: Disponibilizar arquivo APK para Download
         uses: actions/upload-artifact@v4
         with:
           name: Termodinamica_Movel_APK
-          path: build/apk/app-release.apk
+          path: build/apk/
