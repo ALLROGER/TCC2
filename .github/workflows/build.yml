@@ -28,9 +28,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet numpy
 
-      - name: Compilar o Aplicativo Nativo (Flet Build)
+      - name: Compilar o Aplicativo Ignorando Trava de Metadados (APK)
         run: |
-          flet build apk --no-config-check --no-android-licenses-check
+          flet build apk --yes --android-property android.experimental.checkJetifier=false
 
       - name: Disponibilizar arquivo APK para Download
         uses: actions/upload-artifact@v4
