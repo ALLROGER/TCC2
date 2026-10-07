@@ -1,0 +1,15 @@
+name: termodinamica_movel
+description: Aplicativo de Termodinâmica para TCC2.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flet: 1.0.3
+  jni: 1.1.0
+
+dependency_overrides:
+  jni: 1.1.0
