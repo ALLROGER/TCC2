@@ -2,7 +2,7 @@ name: Gerar APK do TCC2
 on:
   push:
     branches:
-      - main
+      - maib
   workflow_dispatch:
 
 jobs:
